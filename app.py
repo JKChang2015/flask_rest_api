@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from flask import Flask, jsonify, make_response,redirect,url_for
+from flask import Flask, jsonify, make_response, redirect,render_template
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 
@@ -25,10 +25,16 @@ app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
 
 app.register_blueprint(ensembl_api.get_blueprint())
 
+
 # redirect root page to swagger
 @app.route('/')
 def hello():
     return redirect(SWAGGER_URL)
+
+@app.route('/livesearch')
+def livesearach():
+    return render_template("index.html")
+
 
 @app.errorhandler(400)
 def handle_400_error(_error):

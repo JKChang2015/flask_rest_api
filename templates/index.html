@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+<form id="form1">
+    <table border="0">
+        <tr>
+            <td>
+                Species:
+            </td>
+            <td>
+                <input id="species_box" name="species" type="text"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Gene:
+            </td>
+            <td>
+                <input id="Gene_box" name="Gene" type="text"/>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+                <p id="Genelist"></p>
+            </td>
+
+        </tr>
+
+    </table>
+</form>
+</body>
+
+<script>
+    $(document).ready(function () {
+
+            $("#Gene_box").on("input", function (e) {
+                species = $.trim($("#species_box").val());
+                query = $.trim($("#Gene_box").val());
+                var lim = 10
+
+                $.ajax({
+                    url: "/gene_suggest",
+                    type: "GET",
+                    dataType: "json",
+                    data: {
+                        "species": species,
+                        "query": query,
+                        "limit": lim
+                    },
+                    success: function (response) {
+                        var d = "<ul style=\"list-style-type:none;\">";
+                        $.each(response.data, function (index, value) {
+                            d += "<li>" + value + "</li>";
+                        });
+                        d += "</ul>";
+                        $("#Genelist").html(d).css("background-color", '#F0F9BF');
+                    }
+
+                });
+            })
+        }
+    )
+</script>
+
+</html>

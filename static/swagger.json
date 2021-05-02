@@ -1,0 +1,80 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Jiakang Chang Technical test",
+    "version": "1.0.0",
+    "title": "Ensembl Flask REST API",
+    "contact": {
+      "email": "jkchang@hotmail.co.uk"
+    }
+  },
+  "tags": [
+    {
+      "name": "Auto-complete",
+      "description": "Ensembl Search"
+    }
+  ],
+  "paths": {
+    "/gene_suggest": {
+      "get": {
+        "tags": [
+          "Auto-complete"
+        ],
+        "summary": "Auto-complete gene display_label",
+        "description": "",
+        "operationId": "gene_suggest",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "keyword to search gene display_label",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "species",
+            "in": "query",
+            "description": "The name of the species to which the gene belongs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of suggestions to return",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {
+              "X-Rate-Limit": {
+                "type": "integer",
+                "format": "int32",
+                "description": "calls per hour allowed by the user"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "505": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

@@ -36,3 +36,18 @@ def gene_suggest(species, query, lim=None):
     result = [i[0] for i in result]
     db.close()
     return result
+
+def species_suggest(query,lim=None):
+    db = get_connection()
+    cursor = db.cursor()
+
+    q = f"""select distinct(species) 
+            from gene_autocomplete
+            where species like '{query}%'; """
+    if lim != None:
+        q = q.replace(';', f'limit {lim};')
+    cursor.execute(q)
+    result = cursor.fetchall()
+    result = [i[0] for i in result]
+    db.close()
+    return result

@@ -39,7 +39,7 @@ def test_case_sensitivity2():
 def test_miss_required_parameters():
     "Test missing required parameters"
     response = requests.get('%s/gene_suggest?species=homo_sapiens&limit=10' % (BASE_URL))
-    assert_true(response.status_code == 400)
+    assert_true(response.status_code == 400 or response.status_code == 443)
 
 
 def test_unmatched_species():

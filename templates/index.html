@@ -41,6 +41,31 @@
 
 <script>
     $(document).ready(function () {
+            $("#species_box").on("input", function (e) {
+                species = $.trim($("#species_box").val());
+                var lim = 10
+
+                $.ajax({
+                    url: "/species_suggest",
+                    type: "GET",
+                    dataType: "json",
+                    data: {
+                        "query": species,
+                        "limit": lim
+                    },
+                    success: function (response) {
+                        var d = "<ul style=\"list-style-type:none;\">";
+                        $.each(response.data, function (index, value) {
+                            d += "<li>" + value + "</li>";
+                        });
+                        d += "</ul>";
+                        $("#Genelist").html(d).css("background-color", '#F0F9BF');
+                    }
+
+                });
+            })
+
+
 
             $("#Gene_box").on("input", function (e) {
                 species = $.trim($("#species_box").val());

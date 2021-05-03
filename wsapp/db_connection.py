@@ -25,7 +25,7 @@ def gene_suggest(species, query, lim=None):
     db = get_connection()
     cursor = db.cursor()
 
-    q = f"""select display_label 
+    q = f"""select distinct (display_label) 
             from gene_autocomplete 
             where species = '{species}' 
               and display_label like '{query}%'; """

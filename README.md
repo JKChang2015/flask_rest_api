@@ -74,7 +74,9 @@ https://jkchang.herokuapp.com/swagger/  &nbsp; &nbsp; &nbsp; &nbsp; or &nbsp; &n
 
 
 <br><br>
-## 4.gene suggest web app
+## 4.Gene suggest web app
+I also created a species-suggest endpoint to guide client's input. 
+
 ![live_search.gif](/resources/live_search.gif)
 #### Hosted Locally 
 http://127.0.0.1:5000/livesearch
